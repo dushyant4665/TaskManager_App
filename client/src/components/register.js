@@ -1,198 +1,48 @@
-// import React, { useState } from 'react';
-// import { register } from '../api'; // Adjust the path based on your structure
-
-// const Register = () => {
-//     const [formData, setFormData] = useState({
-//         username: '',
-//         email: '',
-//         password: '',
-//     });
-//     const [error, setError] = useState(null); // Error state
-//     const [success, setSuccess] = useState(false); // Success state
-
-//     const handleSubmit = async (e) => {
-//         e.preventDefault();
-//         const response= fetch('http://localhost:5000/api/auth/register')
-//         setError(null);
-//         setSuccess(false);
-//         try {
-//             const response = await register(formData);
-//             console.log('Response:', response.data); // Log the successful response
-//             setSuccess(true);
-//         } catch(error){
-//             setError('Registration failed. Please try again.');
-//             console.error('Registration failed:', error);
-//             console.error('Error response:', error.response); // Log detailed error response
-//         }
- 
-//     };
-
-
-//     return (
-//         <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-500 via-pink-500 to-red-500">
-//             <div className="bg-white shadow-lg rounded-lg p-8 w-96">
-//                 <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Register</h2>
-//                 {error && <p className="text-red-500 text-center">{error}</p>}
-//                 {success && <p className="text-green-500 text-center">Registration successful!</p>}
-//                 <form onSubmit={handleSubmit} className="space-y-4">
-//                     <div className="relative">
-//                         <input
-//                             type="text"
-//                             placeholder="Username"
-//                             className="w-full px-4 py-2 text-sm bg-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 transition duration-300 ease-in-out"
-//                             onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-//                             required
-//                         />
-//                     </div>
-//                     <div className="relative">
-//                         <input
-//                             type="email"
-//                             placeholder="Email"
-//                             className="w-full px-4 py-2 text-sm bg-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 transition duration-300 ease-in-out"
-//                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-//                             required
-//                         />
-//                     </div>
-//                     <div className="relative">
-//                         <input
-//                             type="password"
-//                             placeholder="Password"
-//                             className="w-full px-4 py-2 text-sm bg-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 transition duration-300 ease-in-out"
-//                             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-//                             required
-//                         />
-//                     </div>
-//                     <button
-//                         type="submit"
-//                         className="w-full py-2 text-sm font-semibold text-white bg-purple-600 hover:bg-purple-700 rounded-lg transition duration-300 ease-in-out"
-//                     >
-//                         Register
-//                     </button>
-//                 </form>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default Register;
-
-
-
-// import React, { useState } from 'react';
-// import { login } from '../api'; // Adjust the path based on your structure
-
-// const Login = () => {
-//   const [formData, setFormData] = useState({ email: '', password: '' });
-//   const [error, setError] = useState(null);
-//   const [success, setSuccess] = useState(false);
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setError(null); // Reset error state
-//     setSuccess(false); // Reset success state
-//     try {
-//       const { data } = await login(formData);
-//       localStorage.setItem('token', data.token); // Store JWT token
-//       setSuccess(true); // Show success message
-//       // Optionally redirect to home or tasks page
-//     } catch (error) {
-//       setError('Login failed. Please try again.'); // Set error message
-//       console.error('Error logging in', error);
-//     }
-//   };
-
-//   return (
-//     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-500 via-pink-500 to-red-500">
-//       <div className="bg-white shadow-lg rounded-lg p-8 w-96">
-//         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Login</h2>
-//         {error && <p className="text-red-500 text-center">{error}</p>}
-//         {success && <p className="text-green-500 text-center">Login successful!</p>}
-//         <form onSubmit={handleSubmit} className="space-y-4">
-//           <div className="relative">
-//             <input
-//               type="email"
-//               placeholder="Email"
-//               className="w-full px-4 py-2 text-sm bg-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 transition duration-300 ease-in-out"
-//               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-//               required
-//             />
-//           </div>
-//           <div className="relative">
-//             <input
-//               type="password"
-//               placeholder="Password"
-//               className="w-full px-4 py-2 text-sm bg-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 transition duration-300 ease-in-out"
-//               onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-//               required
-//             />
-//           </div>
-//           <button
-//             type="submit"
-//             className="w-full py-2 text-sm font-semibold text-white bg-purple-600 hover:bg-purple-700 rounded-lg transition duration-300 ease-in-out"
-//           >
-//             Login
-//           </button>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Login;
-
-
-
 import React, { useState } from 'react';
-import ReCAPTCHA from 'react-google-recaptcha';
+import HCaptcha from '@hcaptcha/react-hcaptcha'; // Importing hCaptcha component
 import { register } from '../api';
 import Login from './login';
 
-
-
 const Register = () => {
-
-
-    const [formData, setFormData] = useState({ email: '', password: '' });
-      const [error, setError] = useState(null);
-      const [success, setSuccess] = useState(false);
-    
-      const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError(null); 
-        setSuccess(false); 
-        try {
-          const { data } = await Login(formData);
-          localStorage.setItem('token', data.token);
-          setSuccess(true);
-        
-        } catch (error) {
-          setError('Login failed. Please try again.'); 
-          console.error('Error logging in', error);
-        }
-      };
-    
+  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
   const [captchaValue, setCaptchaValue] = useState(null);
 
-  const onSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(null);
+    setSuccess(false);
+
+    // Check if the CAPTCHA is completed
     if (!captchaValue) {
-      alert("Please complete the CAPTCHA.");
+      alert('Please complete the CAPTCHA.');
       return;
     }
 
-    const response = await fetch('http://localhost:5000/verify-captcha', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ captchaToken: captchaValue }),
-    });
+    try {
+      // Assuming you have an endpoint to verify CAPTCHA
+      const captchaResponse = await fetch('http://localhost:5000/verify-captcha', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ captchaToken: captchaValue }),
+      });
 
-    const result = await response.json();
-    if (response.ok) {
-      console.log('CAPTCHA verified: ', result.message);
-    } else {
-      console.error('CAPTCHA verification failed:', result.message);
+      const captchaResult = await captchaResponse.json();
+
+      if (captchaResponse.ok) {
+        // CAPTCHA verified, proceed to register the user
+        const { data } = await register(formData); // Change `Login` to `register`
+        localStorage.setItem('token', data.token);
+        setSuccess(true);
+      } else {
+        throw new Error(captchaResult.message);
+      }
+    } catch (error) {
+      setError('Registration failed. Please try again.');
+      console.error('Error during registration', error);
     }
   };
 
@@ -204,7 +54,7 @@ const Register = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-6">
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Register Form</h2>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={handleSubmit}>
           <div className="mb-4 group">
             <label className="block text-gray-700 font-medium mb-2">Username</label>
             <input
@@ -214,16 +64,14 @@ const Register = () => {
               placeholder="Enter your username"
               required
             />
-                 
-                     <label className="block text-gray-700 font-medium mb-2">Username</label>
-           <input
+            <label className="block text-gray-700 font-medium mb-2">Email</label>
+            <input
               type="email"
-              name='Email'
+              name='email'
               placeholder="Email"
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            //   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            // placeholder="Enter your username"
-            required
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              required
             />
           </div>
           <div className="mb-4">
@@ -237,8 +85,8 @@ const Register = () => {
             />
           </div>
           <div className="mb-6 flex justify-center">
-            <ReCAPTCHA
-              sitekey="your-site-key-here"
+            <HCaptcha
+              sitekey="458a23e0-c63a-45a0-baa6-dc4abe4ef920" // Replace with your hCaptcha site key
               onChange={handleCaptchaChange}
             />
           </div>
@@ -248,6 +96,8 @@ const Register = () => {
           >
             Submit
           </button>
+          {error && <p className="text-red-500 text-center mt-2">{error}</p>}
+          {success && <p className="text-green-500 text-center mt-2">Registration successful!</p>}
         </form>
       </div>
     </div>
