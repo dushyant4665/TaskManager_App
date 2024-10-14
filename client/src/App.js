@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { Provider } from 'react-redux';
 
 import store from './redux/store';
-import Login from './components/login';
-import Register from './components/register';
+import Login from './components/Auth/login';
+import Register from './components/Auth/register';
 import TaskForm from './components/taskForm';
 import TaskList from './components/taskList';
 

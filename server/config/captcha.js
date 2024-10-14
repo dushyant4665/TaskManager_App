@@ -6,7 +6,8 @@ app.use(express.json()); // To parse JSON request bodies
 
 app.post('/verify-captcha', async (req, res) => {
   const { captchaToken } = req.body;
-  const secretKey = your-hcaptcha-secret-key; // Replace with your actual secret key
+  const secretKey = your-hcaptcha-secret-key;
+  console.log(secretKey)
 
   const verificationURL = `https://hcaptcha.com/siteverify`;
   try {

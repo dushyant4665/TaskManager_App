@@ -1,6 +1,15 @@
+
+
+
+
+
+
+
+
+
 import React, { useState } from 'react';
 import HCaptcha from '@hcaptcha/react-hcaptcha'; // Importing hCaptcha component
-import { register } from '../api';
+import { register } from '../../api';
 import Login from './login';
 
 const Register = () => {
@@ -86,7 +95,7 @@ const Register = () => {
           </div>
           <div className="mb-6 flex justify-center">
             <HCaptcha
-              sitekey="458a23e0-c63a-45a0-baa6-dc4abe4ef920" // Replace with your hCaptcha site key
+              sitekey='your-hcaptcha-site-key' // Replace with your hCaptcha site key
               onChange={handleCaptchaChange}
             />
           </div>
