@@ -1,8 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const authRoutes = require('./routes/authRoutes'); // Ensure this path is correct
-const taskRoutes = require('./routes/taskRoutes'); // Ensure this path is also correct
+const authRoutes = require('../routes/authRoutes'); // Ensure this path is correct
+const taskRoutes = require('../routes/taskRoutes'); // Ensure this path is also correct
 const dotenv = require('dotenv');
 
 dotenv.config();
