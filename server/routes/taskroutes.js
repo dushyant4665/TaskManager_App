@@ -1,11 +1,10 @@
 const express = require('express');
-const { createTask, getTasks } = require('../controllers/taskcontroller');
+const { getTasks, createTask } = require('./controllers/taskController'); // Corrected path
+const authMiddleware = require('../middleware/authMiddleware');
+
 const router = express.Router();
 
-// Create a task
-router.post('/', createTask);
-
-// Get all tasks
-router.get('/', getTasks);
+router.get('/', authMiddleware, getTasks);
+router.post('/', authMiddleware, createTask);
 
 module.exports = router;
