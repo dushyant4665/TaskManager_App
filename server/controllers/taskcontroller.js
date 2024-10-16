@@ -1,4 +1,4 @@
-const Task = require('../models/Task');
+const Task = require('../models/task');
 
 exports.getTasks = async (req, res) => {
     try {
@@ -17,4 +17,6 @@ exports.createTask = async (req, res) => {
     } catch (error) {
         res.status(400).json({ message: 'Failed to create task' });
     }
-};
+}
+
+export default Task; 
