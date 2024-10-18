@@ -2,7 +2,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
-exports.register = async (req, res) => {
+
+
+const register = async (req, res) => {
     try {
         const { name, email, password } = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -14,7 +16,7 @@ exports.register = async (req, res) => {
     }
 };
 
-exports.login = async (req, res) => {
+const login = async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
@@ -29,4 +31,5 @@ exports.login = async (req, res) => {
         res.status(500).json({ message: 'Error logging in' });
     }
 };
-export default  login ;
+
+module.exports = { register, login };

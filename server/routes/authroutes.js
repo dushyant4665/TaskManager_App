@@ -4,7 +4,7 @@ const verifyCaptcha = require('../config/captcha');
 
 const router = express.Router();
 
-router.post('/register', verifyCaptcha, register);
+router.post('/register', verifyCaptcha, register); 
 router.post('/login', verifyCaptcha, login);
 
 module.exports = router;
