@@ -7,4 +7,11 @@ const router = express.Router();
 router.get('/', authMiddleware, getTasks);
 router.post('/', authMiddleware, createTask);
 
+
+console.log(typeof register); 
+console.log(typeof login);
+
+
 module.exports = router;
+
+

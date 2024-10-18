@@ -7,6 +7,7 @@ exports.getTasks = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Failed to fetch tasks' });
     }
+    
 };
 
 exports.createTask = async (req, res) => {
@@ -17,6 +18,7 @@ exports.createTask = async (req, res) => {
     } catch (error) {
         res.status(400).json({ message: 'Failed to create task' });
     }
+    res.json({ message: "Login successful" });
 }
 
 export default Task; 

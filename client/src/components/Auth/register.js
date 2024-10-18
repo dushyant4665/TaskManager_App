@@ -1,16 +1,6 @@
-
-
-
-
-
-
-
-
-
 import React, { useState } from 'react';
-import HCaptcha from '@hcaptcha/react-hcaptcha'; // Importing hCaptcha component
+import HCaptcha from '@hcaptcha/react-hcaptcha'; 
 import { register } from '../../api';
-import Login from './login';
 
 const Register = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -23,14 +13,12 @@ const Register = () => {
     setError(null);
     setSuccess(false);
 
-    // Check if the CAPTCHA is completed
     if (!captchaValue) {
       alert('Please complete the CAPTCHA.');
       return;
     }
 
     try {
-      // Assuming you have an endpoint to verify CAPTCHA
       const captchaResponse = await fetch('http://localhost:5000/verify-captcha', {
         method: 'POST',
         headers: {
@@ -42,8 +30,7 @@ const Register = () => {
       const captchaResult = await captchaResponse.json();
 
       if (captchaResponse.ok) {
-        // CAPTCHA verified, proceed to register the user
-        const { data } = await register(formData); // Change `Login` to `register`
+        const { data } = await register(formData);
         localStorage.setItem('token', data.token);
         setSuccess(true);
       } else {
@@ -76,7 +63,7 @@ const Register = () => {
             <label className="block text-gray-700 font-medium mb-2">Email</label>
             <input
               type="email"
-              name='email'
+              name="email"
               placeholder="Email"
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -95,7 +82,7 @@ const Register = () => {
           </div>
           <div className="mb-6 flex justify-center">
             <HCaptcha
-              sitekey='your-hcaptcha-site-key' // Replace with your hCaptcha site key
+              sitekey={process.env.REACT_APP_HCAPTCHA_SITE_KEY}
               onChange={handleCaptchaChange}
             />
           </div>

@@ -2,12 +2,14 @@ const express = require('express');
 const axios = require('axios');
 const app = express();
 
-app.use(express.json()); // To parse JSON request bodies
+
+require('dotenv').config();
+
+app.use(express.json()); 
 
 app.post('/verify-captcha', async (req, res) => {
   const { captchaToken } = req.body;
-  const secretKey = your-hcaptcha-secret-key;
-  console.log(secretKey)
+  const secretKey = process.env.HCAPTCHA_SECRET_KEY; 
 
   const verificationURL = `https://hcaptcha.com/siteverify`;
   try {
