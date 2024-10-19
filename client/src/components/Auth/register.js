@@ -81,10 +81,11 @@ const Register = () => {
             />
           </div>
           <div className="mb-6 flex justify-center">
-            <HCaptcha
-              sitekey={process.env.REACT_APP_HCAPTCHA_SITE_KEY}
-              onChange={handleCaptchaChange}
-            />
+          <HCaptcha
+  sitekey={process.env.local.HCAPTCHA_SITE_KEY}
+  onChange={handleCaptchaChange}
+/>
+
           </div>
           <button
             type="submit"

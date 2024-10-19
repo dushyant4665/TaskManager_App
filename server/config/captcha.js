@@ -1,19 +1,16 @@
-const express = require('express');
 const axios = require('axios');
-const app = express();
 
 
-require('dotenv').config();
-
-app.use(express.json()); 
-
-app.post('/verify-captcha', async (req, res) => {
+const verifyCaptcha = async (req, res, next) => {
   const { captchaToken } = req.body;
   const secretKey = process.env.HCAPTCHA_SECRET_KEY; 
 
-  const verificationURL = `https://hcaptcha.com/siteverify`;
+  if (!captchaToken) {
+    return res.status(400).json({ message: 'CAPTCHA token is missing.' });
+  }
+
   try {
-    const response = await axios.post(verificationURL, null, {
+    const response = await axios.post(`https://hcaptcha.com/siteverify`, null, {
       params: {
         secret: secretKey,
         response: captchaToken,
@@ -21,16 +18,14 @@ app.post('/verify-captcha', async (req, res) => {
     });
 
     if (response.data.success) {
-      res.status(200).json({ message: 'CAPTCHA verified successfully.' });
+      next(); 
     } else {
-      res.status(400).json({ message: 'CAPTCHA verification failed.' });
+      return res.status(400).json({ message: 'CAPTCHA verification failed.' });
     }
   } catch (error) {
-    res.status(500).json({ message: 'Error verifying CAPTCHA.' });
+    console.error('Error verifying CAPTCHA:', error);
+    return res.status(500).json({ message: 'Error verifying CAPTCHA.' });
   }
-});
+};
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+module.exports = verifyCaptcha;

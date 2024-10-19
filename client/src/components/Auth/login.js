@@ -7,16 +7,23 @@ const Login = () => {
   const [captchaValue, setCaptchaValue] = useState(null);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false); // Loading state for form submission
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
     setSuccess(false);
+    setLoading(true); // Set loading state to true
+
     if (!captchaValue) {
       setError('Please complete the CAPTCHA.');
+      setLoading(false); // Reset loading state
       return;
     }
+
     try {
-      const captchaResponse = await fetch('/api/verify-captcha', { 
+      // CAPTCHA verification
+      const captchaResponse = await fetch('/api/verify-captcha', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -24,9 +31,10 @@ const Login = () => {
         body: JSON.stringify({ captchaToken: captchaValue }),
       });
       const captchaResult = await captchaResponse.json();
+
       if (captchaResponse.ok && captchaResult.success) {
-      
-        const response = await fetch('/api/login', { 
+        // Login request
+        const response = await fetch('/api/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -35,12 +43,10 @@ const Login = () => {
         });
 
         if (response.ok) {
-    
-          const data = await response.json(); 
-        
-          setSuccess(true); 
+          const data = await response.json();
+          localStorage.setItem('token', data.token); // Store token if needed
+          setSuccess(true);
         } else {
-   
           setError('Invalid username or password.');
         }
       } else {
@@ -49,25 +55,36 @@ const Login = () => {
     } catch (error) {
       setError('An error occurred during login.');
       console.error(error);
+    } finally {
+      setLoading(false); // Reset loading state after request is done
     }
   };
+
   const handleCaptchaChange = (value) => {
     setCaptchaValue(value);
   };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-6">
-        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
-          Login
-        </h2>
+        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Login</h2>
+
+        {/* Success message */}
         {success && (
-          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+          <div
+            className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4"
+            role="alert"
+          >
             <span className="block sm:inline">Login successful!</span>
           </div>
         )}
 
+        {/* Error message */}
         {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+          <div
+            className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4"
+            role="alert"
+          >
             <span className="block sm:inline">{error}</span>
           </div>
         )}
@@ -87,6 +104,7 @@ const Login = () => {
               required
             />
           </div>
+
           <div className="mb-4">
             <label className="block text-gray-700 font-medium mb-2" htmlFor="password">
               Password
@@ -95,24 +113,28 @@ const Login = () => {
               type="password"
               id="password"
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Enter your password "
+              placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
 
+          {/* hCaptcha */}
           <div className="mb-6 flex justify-center">
             <HCaptcha
-              sitekey="458a23e0-c63a-45a0-baa6-dc4abe4ef920"
-              onChange={handleCaptchaChange}
+              sitekey="458a23e0-c63a-45a0-baa6-dc4abe4ef920" // Replace with your site key
+              onVerify={handleCaptchaChange}
             />
           </div>
+
+          {/* Submit button with loading state */}
           <button
             type="submit"
             className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
+            disabled={loading} // Disable button while loading
           >
-            Login
+            {loading ? 'Logging in...' : 'Login'}
           </button>
         </form>
       </div>

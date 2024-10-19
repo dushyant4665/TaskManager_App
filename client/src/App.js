@@ -1,23 +1,24 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Home from './Auth/Home'; 
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from './components/Auth/home'; 
 import Register from './components/Auth/register';
 import Login from './components/Auth/login'; 
-import footer from './components/Layout/footer';
+import Footer from './components/Layout/footer';
+import Header from './components/Layout/header'; // Import the Header
 
 const App = () => {
   return (
     <Router>
       <div className="flex flex-col min-h-screen">
+        <Header /> {/* Render the Header at the top */}
         <main className="flex-grow">
-          <Switch>
-            <Route path="/" exact component={Home} /> {/* Home page */}
-            <Route path="/register" component={Register} /> {/* Register page */}
-            <Route path="/login" component={Login} /> {/* Login page */}
-            {/* Add more routes as needed */}
-          </Switch>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
         </main>
-      
+        <Footer />
       </div>
     </Router>
   );
