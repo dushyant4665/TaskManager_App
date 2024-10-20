@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { getTasks, createTask } from '../api'; // Ensure these imports match the API functions
+import { getTasks, createTask } from '../api'; 
+import TaskItem from './taskItem';  // Import TaskItem
 
 const TaskList = () => {
     const [tasks, setTasks] = useState([]);
@@ -20,7 +21,7 @@ const TaskList = () => {
     const handleCreateTask = async (taskData) => {
         try {
             await createTask(taskData);
-            // Optionally refresh tasks or show a success message
+            
         } catch (error) {
             console.error('Failed to create task', error);
         }
@@ -28,18 +29,13 @@ const TaskList = () => {
 
     return (
         <div>
-            <h2 className="text-2xl font-bold">Task List</h2>
+            <h2 className="text-2xl font-bold mb-4">Task List</h2>
             <ul className="space-y-2">
                 {tasks.map((task) => (
-                    <li key={task._id} className="p-4 border rounded-lg">
-                        <h3 className="text-xl">{task.title}</h3>
-                        <p>{task.description}</p>
-                        <p>Status: {task.status}</p>
-                        <p>Priority: {task.priority}</p>
-                    </li>
+                    <TaskItem key={task._id} task={task} />  // Use TaskItem to render each task
                 ))}
             </ul>
-    </div>
+        </div>
    );
 };
-export default TaskList
+export default TaskList;

@@ -1,25 +1,25 @@
 import React from 'react';
 
-const footer = () => {
+const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-white py-6">
-      <div className="container mx-auto flex flex-col items-center justify-between sm:flex-row">
-        <div className="text-center sm:text-left mb-4 sm:mb-0">
-          <h4 className="text-lg font-semibold">Task Manager App</h4>
-          <p className="text-sm">Manage your tasks efficiently and securely.</p>
+    <footer className="bg-gray-900 text-gray-200 py-8">
+      <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center">
+        <div className="mb-6 sm:mb-0 text-center sm:text-left">
+          <h4 className="text-xl font-bold">Task Manager Pro</h4>
+          <p className="text-sm mt-2 text-gray-400">Manage your tasks efficiently and securely.</p>
         </div>
-        <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
-          <a href="/" className="text-sm hover:text-gray-400">Home</a>
-          <a href="/about" className="text-sm hover:text-gray-400">About</a>
-          <a href="/contact" className="text-sm hover:text-gray-400">Contact Us</a>
-          <a href="/privacy" className="text-sm hover:text-gray-400">Privacy Policy</a>
+        <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-8">
+          <a href="/" className="text-sm hover:text-indigo-400 transition-colors duration-300">Home</a>
+          <a href="/about" className="text-sm hover:text-indigo-400 transition-colors duration-300">About</a>
+          <a href="/contact" className="text-sm hover:text-indigo-400 transition-colors duration-300">Contact Us</a>
+          <a href="/privacy" className="text-sm hover:text-indigo-400 transition-colors duration-300">Privacy Policy</a>
         </div>
       </div>
-      <div className="mt-6 text-center border-t border-gray-700 pt-4 text-sm">
-        © {new Date().getFullYear()} Task Manager App. All rights reserved.
+      <div className="mt-8 text-center border-t border-gray-700 pt-4 text-sm text-gray-400">
+        © {new Date().getFullYear()} Task Manager Pro. All rights reserved.
       </div>
     </footer>
   );
 };
 
-export default footer;
+export default Footer;

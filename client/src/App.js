@@ -5,7 +5,7 @@ import Register from './components/Auth/register';
 import Login from './components/Auth/login'; 
 import Footer from './components/Layout/footer';
 import Header from './components/Layout/header'; 
-import TaskForm from './components/taskForm'; // Import your TaskForm component
+import TaskForm from './components/taskForm'; 
 
 const App = () => {
   return (
@@ -16,11 +16,11 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Login />}/>
             <Route path="/create-task" element={<TaskForm />} /> 
           </Routes>
         </main>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </Router>
   );
