@@ -15,15 +15,15 @@
 // );
 
 import React from 'react';
-import { createRoot } from 'react-dom/client';  // Import createRoot
+import { createRoot } from 'react-dom/client';  
 import App from './App';
-import './index.css';  // Import global styles if any
+import './index.css';  
 
 const container = document.getElementById('root');
-const root = createRoot(container);  // Create root using React 18 API
+const root = createRoot(container);  
 
 root.render(
-  <React.StrictMode>
+  <>
     <App />
-  </React.StrictMode>
+  </>
 );

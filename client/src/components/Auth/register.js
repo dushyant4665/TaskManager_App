@@ -46,6 +46,9 @@ const Register = () => {
     setCaptchaValue(value);
   };
 
+  console.log('HCAPTCHA_SITE_KEY:', process.env.REACT_APP_HCAPTCHA_SITE_KEY);
+
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-6">
@@ -82,9 +85,8 @@ const Register = () => {
           </div>
           <div className="mb-6 flex justify-center">
           <HCaptcha
-  sitekey={process.env.local.HCAPTCHA_SITE_KEY}
-  onChange={handleCaptchaChange}
-/>
+    sitekey={process.env.REACT_APP_HCAPTCHA_SITE_KEY}
+    onChange={handleCaptchaChange}/>
 
           </div>
           <button

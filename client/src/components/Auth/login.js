@@ -7,22 +7,22 @@ const Login = () => {
   const [captchaValue, setCaptchaValue] = useState(null);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
-  const [loading, setLoading] = useState(false); // Loading state for form submission
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
     setSuccess(false);
-    setLoading(true); // Set loading state to true
+    setLoading(true); 
 
     if (!captchaValue) {
       setError('Please complete the CAPTCHA.');
-      setLoading(false); // Reset loading state
+      setLoading(false); 
       return;
     }
 
     try {
-      // CAPTCHA verification
+
       const captchaResponse = await fetch('/api/verify-captcha', {
         method: 'POST',
         headers: {
@@ -33,7 +33,7 @@ const Login = () => {
       const captchaResult = await captchaResponse.json();
 
       if (captchaResponse.ok && captchaResult.success) {
-        // Login request
+      
         const response = await fetch('/api/login', {
           method: 'POST',
           headers: {
@@ -44,7 +44,7 @@ const Login = () => {
 
         if (response.ok) {
           const data = await response.json();
-          localStorage.setItem('token', data.token); // Store token if needed
+          localStorage.setItem('token', data.token);
           setSuccess(true);
         } else {
           setError('Invalid username or password.');
@@ -56,7 +56,7 @@ const Login = () => {
       setError('An error occurred during login.');
       console.error(error);
     } finally {
-      setLoading(false); // Reset loading state after request is done
+      setLoading(false); 
     }
   };
 
@@ -69,7 +69,6 @@ const Login = () => {
       <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-6">
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Login</h2>
 
-        {/* Success message */}
         {success && (
           <div
             className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4"
@@ -79,7 +78,7 @@ const Login = () => {
           </div>
         )}
 
-        {/* Error message */}
+     
         {error && (
           <div
             className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4"
@@ -120,15 +119,15 @@ const Login = () => {
             />
           </div>
 
-          {/* hCaptcha */}
+        
           <div className="mb-6 flex justify-center">
             <HCaptcha
-              sitekey="458a23e0-c63a-45a0-baa6-dc4abe4ef920" // Replace with your site key
+              sitekey="458a23e0-c63a-45a0-baa6-dc4abe4ef920" 
               onVerify={handleCaptchaChange}
             />
           </div>
 
-          {/* Submit button with loading state */}
+       
           <button
             type="submit"
             className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
