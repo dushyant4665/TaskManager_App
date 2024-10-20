@@ -14,7 +14,7 @@ const Home = () => {
         <h1 className="text-5xl font-extrabold drop-shadow-lg">TaskManager</h1>
         <p className="mt-4 text-lg text-gray-100">
           Stay on top of your tasks and achieve more with simplicity and efficiency.
-          Be discipline
+          Be discipline.
         </p>
       </div>
 
@@ -35,7 +35,7 @@ const Home = () => {
       </div>
 
       <footer className="absolute bottom-4 text-center text-sm text-gray-200">
-        <p>© 2024 Task Manager Pro. All rights reserved.</p>
+        <p>© 2024 Dushyant Khandelwal. All rights reserved.</p>
       </footer>
     </div>
   );
