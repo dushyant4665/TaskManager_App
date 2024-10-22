@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getTasks, createTask } from '../api'; 
-import TaskItem from './taskItem';  // Import TaskItem
+import TaskItem from './taskItem';  
 
 const TaskList = () => {
     const [tasks, setTasks] = useState([]);
@@ -26,6 +26,7 @@ const TaskList = () => {
             console.error('Failed to create task', error);
         }
     };
+    console.log(handleCreateTask)
 
     return (
         <div>
