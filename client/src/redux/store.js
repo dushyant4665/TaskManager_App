@@ -1,36 +1,49 @@
 // import { createStore, combineReducers, applyMiddleware } from 'redux';
 // import thunk from 'redux-thunk';
 // import { composeWithDevTools } from 'redux-devtools-extension';
-// import { authReducer } from './reducers/authReducer';  // Ensure this file exists in /src/redux/reducers
-// import { taskReducer } from './reducers/taskReducer'; // Task reducer
+// import authReducer from './reducers/authReducer';  
+// import taskReducer from './reducers/taskReducer';  
 
-// // Combine all reducers
 // const rootReducer = combineReducers({
-//   auth: authReducer,  // Authentication state
-//   tasks: taskReducer, // Task state
+//   auth: authReducer,  
+//   tasks: taskReducer,  
 // });
 
-// // Create Redux store
 // const store = createStore(
 //   rootReducer,
-//   composeWithDevTools(applyMiddleware(thunk)) // Apply middleware (e.g., thunk)
+//   composeWithDevTools(applyMiddleware(thunk))
 // );
 
 // export default store;
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import authReducer from './reducers/authReducer';  // Default import
-import taskReducer from './reducers/taskReducer';  // Default import
 
-const rootReducer = combineReducers({
-  auth: authReducer,  // Ensure these match exactly
-  tasks: taskReducer,  // Ensure these match exactly
-});
+// import { createStore } from 'redux';
+// import rootReducer from './reducers/rootReducer';
+
+// const store = createStore(
+//   rootReducer,
+//   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() 
+// );
+
+// export default store;
+
+
+// import { createStore } from 'redux';
+// import { composeWithDevTools } from 'redux-devtools-extension'; // Optional for Redux DevTools
+// import rootReducer from './reducers/rootReducer';
+
+// const store = createStore(rootReducer, composeWithDevTools());
+
+// export default store;
+
+
+// client/src/redux/store.js
+
+import { createStore } from 'redux';
+import rootReducer from './reducers/rootReducer'; // Import the rootReducer
 
 const store = createStore(
   rootReducer,
-  composeWithDevTools(applyMiddleware(thunk))
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() // Optional: for Redux DevTools
 );
 
 export default store;

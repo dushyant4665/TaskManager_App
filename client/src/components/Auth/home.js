@@ -5,7 +5,15 @@ const Home = () => {
   const navigate = useNavigate();
 
   const handleCreateTask = () => {
-    navigate('/create-task');
+    navigate('/create-task'); // Navigates to the task creation page
+  };
+
+  const handleViewTasks = () => {
+    navigate('/tasks'); // Navigates to the task list page
+  };
+
+  const handleViewTaskItem = () => {
+    navigate('/tasks/1'); // Navigates to a specific task item, with ID '1' for example
   };
 
   return (
@@ -14,7 +22,7 @@ const Home = () => {
         <h1 className="text-5xl font-extrabold drop-shadow-lg">TaskManager</h1>
         <p className="mt-4 text-lg text-gray-100">
           Stay on top of your tasks and achieve more with simplicity and efficiency.
-          Be discipline.
+          Be disciplined.
         </p>
       </div>
 
@@ -27,10 +35,17 @@ const Home = () => {
         </button>
 
         <button
-          onClick={() => alert('Feature coming soon!')}
+          onClick={handleViewTasks}
           className="bg-gray-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:shadow-2xl hover:bg-gray-600 transition duration-300 transform hover:scale-105"
         >
           View All Tasks
+        </button>
+
+        <button
+          onClick={handleViewTaskItem}
+          className="bg-gray-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:shadow-2xl hover:bg-gray-600 transition duration-300 transform hover:scale-105"
+        >
+          View Task Details (Example Task)
         </button>
       </div>
 

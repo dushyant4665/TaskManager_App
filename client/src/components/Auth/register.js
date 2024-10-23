@@ -7,16 +7,20 @@ const Register = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
   const [captchaValue, setCaptchaValue] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
     setSuccess(false);
+    setLoading(true);
 
     if (!captchaValue) {
       alert('Please complete the CAPTCHA.');
+      setLoading(false);
       return;
     }
+
     try {
       const captchaResponse = await fetch('http://localhost:5000/verify-captcha', {
         method: 'POST',
@@ -32,11 +36,13 @@ const Register = () => {
         const { data } = await register(formData);
         localStorage.setItem('token', data.token);
         setSuccess(true);
+        setLoading(false);
       } else {
         throw new Error(captchaResult.message);
       }
     } catch (error) {
       setError('Registration failed. Please try again.');
+      setLoading(false); 
       console.error('Error during registration', error);
     }
   };
@@ -45,74 +51,73 @@ const Register = () => {
     setCaptchaValue(value);
   };
 
-  console.log('HCAPTCHA_SITE_KEY:', process.env.REACT_APP_HCAPTCHA_SITE_KEY);
-
-
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-100 to-gray-300">
-      <div className="w-full max-w-md bg-white shadow-2xl rounded-lg p-8">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
-          Register
+    <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-r from-slate-600 via-black to-gray-500 text-white">
+      <div className="w-full max-w-lg bg-white shadow-2xl rounded-lg p-8">
+        <h2 className="text-3xl font-extrabold text-center text-gray-800 mb-6">
+          Create Your Account
         </h2>
         
-        {/* Registration Form */}
         <form onSubmit={handleSubmit}>
-          <div className="mb-6 group">
+          <div className="mb-6">
             <label className="block text-gray-700 font-medium mb-2">
               Username
             </label>
             <input
               type="text"
               name="username"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition duration-300"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition duration-300"
               placeholder="Enter your username"
+              onChange={(e) => setFormData({ ...formData, username: e.target.value })}
               required
             />
           </div>
 
-          <div className="mb-6 group">
+          <div className="mb-6">
             <label className="block text-gray-700 font-medium mb-2">Email</label>
             <input
               type="email"
               name="email"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition duration-300"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition duration-300"
               placeholder="Enter your email"
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               required
             />
           </div>
 
-          <div className="mb-6 group">
+          <div className="mb-6">
             <label className="block text-gray-700 font-medium mb-2">Password</label>
             <input
               type="password"
               name="password"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition duration-300"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition duration-300"
               placeholder="Enter your password"
+              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
               required
             />
           </div>
 
-          {/* HCaptcha */}
-          <div className="mb-8 flex justify-center">
+       
+          <div className="mb-6 flex justify-center">
             <HCaptcha
               sitekey={process.env.REACT_APP_HCAPTCHA_SITE_KEY}
               onChange={handleCaptchaChange}
             />
           </div>
 
-          {/* Submit Button */}
+      
           <button
             type="submit"
-            className="w-full bg-indigo-500 text-white py-3 px-4 rounded-lg hover:bg-indigo-600 transition duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-50 shadow-lg"
+            className="w-full bg-blue-500 text-white py-3 px-4 rounded-lg hover:bg-blue-600 transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 shadow-lg"
+            disabled={loading}
           >
-            Submit
+            {loading ? 'Creating Account...' : 'Create Account'}
           </button>
 
-          {/* Error Message */}
+      
           {error && <p className="text-red-500 text-center mt-4">{error}</p>}
           
-          {/* Success Message */}
+   
           {success && (
             <p className="text-green-500 text-center mt-4">
               Registration successful!

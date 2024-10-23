@@ -64,7 +64,8 @@ const Login = () => {
     setCaptchaValue(value);
   };
 
-  return (<div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-r from-slate-600 via-black to-gray-500 text-white"><div className="w-full max-w-md bg-white shadow-2xl rounded-lg p-8">
+  return (<div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-r from-slate-600 via-black to-gray-500 text-white">
+    <div className="w-full max-w-md bg-white shadow-2xl rounded-lg p-8">
     <h2 className="text-3xl font-extrabold text-center text-gray-800 mb-8">
       Welcome Back
     </h2>
