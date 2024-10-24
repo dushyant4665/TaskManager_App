@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-gray-200 py-8">
+    // <footer className="bg-gray-900 text-gray-200 py-8">
       // <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center">
       //   <div className="mb-6 sm:mb-0 text-center sm:text-left">
       //     <h4 className="text-xl font-bold">Task Manager Pro</h4>
@@ -23,7 +23,7 @@ const Footer = () => {
     Technologies used: React.js, TailwindCSS, MongoDB, Hcaptcha, framer motion
   </p>
 </div>
-    </footer>
+    // </footer>
   );
 };
 
