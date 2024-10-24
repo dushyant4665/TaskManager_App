@@ -1,28 +1,27 @@
 import React, { useState } from 'react';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 
-const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [captchaValue, setCaptchaValue] = useState(null);
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(false);
-  const [loading, setLoading] = useState(false);
+const Login=()=>{
+  const[username,setUsername]=useState('');
+  const[password,setPassword]=useState('');
+  const[captchaValue,setCaptchaValue] = useState(null);
+  const[error,setError]=useState(null);
+  const[success,setSuccess]=useState(false);
+  const[loading,setLoading]=useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit=async(e)=>{
     e.preventDefault();
     setError(null);
     setSuccess(false);
     setLoading(true); 
 
-    if (!captchaValue) {
+    if(!captchaValue){
       setError('Please complete the CAPTCHA.');
       setLoading(false); 
       return;
     }
 
-    try {
-
+    try{
       const captchaResponse = await fetch('/api/verify-captcha', {
         method: 'POST',
         headers: {
@@ -30,7 +29,7 @@ const Login = () => {
         },
         body: JSON.stringify({ captchaToken: captchaValue }),
       });
-      const captchaResult = await captchaResponse.json();
+      const captchaResult =await captchaResponse.json();
 
       if (captchaResponse.ok && captchaResult.success) {
       
@@ -43,7 +42,7 @@ const Login = () => {
         });
 
         if (response.ok) {
-          const data = await response.json();
+          const data =await response.json();
           localStorage.setItem('token', data.token);
           setSuccess(true);
         } else {
@@ -60,7 +59,7 @@ const Login = () => {
     }
   };
 
-  const handleCaptchaChange = (value) => {
+  const handleCaptchaChange =(value) => {
     setCaptchaValue(value);
   };
 
@@ -70,7 +69,6 @@ const Login = () => {
       Welcome Back
     </h2>
 
-    {/* Success Message */}
     {success && (
       <div
         className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg mb-6 shadow-md"
@@ -80,7 +78,7 @@ const Login = () => {
       </div>
     )}
 
-    {/* Error Message */}
+  
     {error && (
       <div
         className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-6 shadow-md"
@@ -90,7 +88,7 @@ const Login = () => {
       </div>
     )}
 
-    {/* Login Form */}
+
     <form onSubmit={handleSubmit}>
       <div className="mb-6">
         <label
@@ -128,7 +126,7 @@ const Login = () => {
         />
       </div>
 
-      {/* HCaptcha */}
+    
       <div className="mb-6 flex justify-center">
         <HCaptcha
           sitekey="458a23e0-c63a-45a0-baa6-dc4abe4ef920"
@@ -136,7 +134,7 @@ const Login = () => {
         />
       </div>
 
-      {/* Submit Button */}
+  
       <button
         type="submit"
         className={`w-full bg-indigo-500 text-white py-3 px-4 rounded-lg hover:bg-indigo-600 transition duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-50 shadow-lg ${
