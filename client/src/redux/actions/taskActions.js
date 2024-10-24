@@ -23,7 +23,7 @@
 export const createTask = (task) => {
     return {
       type: 'CREATE_TASK',
-      payload: { ...task, id: Date.now() }, // Assign a unique id using Date.now()
+      payload: { ...task, id: Date.now() }, 
     };
   };
   
