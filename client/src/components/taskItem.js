@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const TaskList = () => {
-  const tasks = useSelector((state) => state.tasks); // Get tasks from Redux store
+  const tasks = useSelector((state) => state.tasks);
 
   return (
     <div className="max-w-4xl mx-auto p-4">
