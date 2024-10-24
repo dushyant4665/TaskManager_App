@@ -50,7 +50,8 @@ const Home=()=>{
       </div>
 
       <footer className="absolute bottom-4 text-center text-sm text-gray-200">
-        <p>© 2024 Dushyant Khandelwal. All rights reserved.</p>
+        <p>© 2024 Task Manager. All rights reserved.</p>
+             <p>Designed by Dushyant Khandelwal</p>
       </footer>
     </div>
   );
