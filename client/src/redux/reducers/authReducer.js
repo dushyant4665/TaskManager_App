@@ -17,7 +17,6 @@
 // export default authReducer;
 
 
-// client/src/redux/reducers/authReducer.js
 const initialState = {
     isAuthenticated: false,
     user: null,
