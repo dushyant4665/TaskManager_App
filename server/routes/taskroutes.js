@@ -1,5 +1,5 @@
 const express = require('express');
-const { getTasks, createTask } = require('./controllers/taskController'); // Corrected path
+const { getTasks, createTask } = require('./controllers/taskController')
 const authMiddleware = require('../middleware/authMiddleware');
 
 const router = express.Router();
