@@ -1,19 +1,19 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import{useNavigate}from'react-router-dom';
 
-const Home = () => {
-  const navigate = useNavigate();
+const Home=()=>{
+  const navigate=useNavigate();
 
-  const handleCreateTask = () => {
-    navigate('/create-task'); // Navigates to the task creation page
+  const handleCreateTask=()=>{
+    navigate('/create-task'); 
   };
 
-  const handleViewTasks = () => {
-    navigate('/tasks'); // Navigates to the task list page
+  const handleViewTasks=()=>{
+    navigate('/tasks'); 
   };
 
-  const handleViewTaskItem = () => {
-    navigate('/tasks/1'); // Navigates to a specific task item, with ID '1' for example
+  const handleViewTaskItem=()=>{
+    navigate('/tasks/1'); 
   };
 
   return (
