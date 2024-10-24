@@ -40,6 +40,7 @@ import TaskForm from './components/taskForm';
 import TaskList from './components/taskList';
 import TaskItem from './components/taskItem';
 import Header from './components/Layout/header';
+import Footer from './components/Layout/footer';
 
 const App = () => {
   return (
@@ -53,10 +54,12 @@ const App = () => {
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
               <Route path="/create-task" element={<TaskForm />} />
-              <Route path="/tasks" element={<TaskList />} /> {/* Task List */}
-              <Route path="/tasks/:id" element={<TaskItem />} /> {/* Task Item */}
+              <Route path="/tasks" element={<TaskList />} /> 
+              <Route path="/tasks/:id" element={<TaskItem />} />
+           
             </Routes>
           </main>
+        <Footer /> 
         </div>
       </Router>
     </Provider>
